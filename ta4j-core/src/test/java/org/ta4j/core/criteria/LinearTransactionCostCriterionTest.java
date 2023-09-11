@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017-2022 Ta4j Organization & respective
+ * Copyright (c) 2017-2023 Ta4j Organization & respective
  * authors (see AUTHORS)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -41,11 +41,11 @@ import org.ta4j.core.num.Num;
 
 public class LinearTransactionCostCriterionTest extends AbstractCriterionTest {
 
-    private ExternalCriterionTest xls;
+    private final ExternalCriterionTest xls;
 
     public LinearTransactionCostCriterionTest(Function<Number, Num> numFunction) throws Exception {
-        super((params) -> new LinearTransactionCostCriterion((double) params[0], (double) params[1],
-                (double) params[2]), numFunction);
+        super(params -> new LinearTransactionCostCriterion((double) params[0], (double) params[1], (double) params[2]),
+                numFunction);
         xls = new XLSCriterionTest(this.getClass(), "LTC.xls", 16, 6, numFunction);
     }
 

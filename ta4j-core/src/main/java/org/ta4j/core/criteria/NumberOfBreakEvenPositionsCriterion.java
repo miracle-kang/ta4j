@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017-2022 Ta4j Organization & respective
+ * Copyright (c) 2017-2023 Ta4j Organization & respective
  * authors (see AUTHORS)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -35,7 +35,7 @@ public class NumberOfBreakEvenPositionsCriterion extends AbstractAnalysisCriteri
 
     @Override
     public Num calculate(BarSeries series, Position position) {
-        return isBreakEvenPosition(position) ? series.numOf(1) : series.numOf(0);
+        return isBreakEvenPosition(position) ? series.one() : series.zero();
     }
 
     @Override
@@ -49,10 +49,7 @@ public class NumberOfBreakEvenPositionsCriterion extends AbstractAnalysisCriteri
     }
 
     private boolean isBreakEvenPosition(Position position) {
-        if (position.isClosed()) {
-            return position.getProfit().isZero();
-        }
-        return false;
+        return position.isClosed() ? position.getProfit().isZero() : false;
     }
 
     /** The lower the criterion value, the better. */

@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017-2022 Ta4j Organization & respective
+ * Copyright (c) 2017-2023 Ta4j Organization & respective
  * authors (see AUTHORS)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -42,7 +42,7 @@ import org.ta4j.core.num.Num;
 public class NumberOfConsecutivePositionsCriterionTest extends AbstractCriterionTest {
 
     public NumberOfConsecutivePositionsCriterionTest(Function<Number, Num> numFunction) {
-        super((params) -> new NumberOfConsecutivePositionsCriterion((PositionFilter) params[0]), numFunction);
+        super(params -> new NumberOfConsecutivePositionsCriterion((PositionFilter) params[0]), numFunction);
     }
 
     @Test

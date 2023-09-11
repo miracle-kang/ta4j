@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2017-2022 Ta4j Organization & respective
+ * Copyright (c) 2017-2023 Ta4j Organization & respective
  * authors (see AUTHORS)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -35,7 +35,6 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ta4j.core.BacktestExecutor;
 import org.ta4j.core.BaseBarSeries;
 import org.ta4j.core.BaseBarSeriesBuilder;
 import org.ta4j.core.BaseStrategy;
@@ -43,6 +42,8 @@ import org.ta4j.core.Position;
 import org.ta4j.core.Rule;
 import org.ta4j.core.Strategy;
 import org.ta4j.core.Trade;
+import org.ta4j.core.backtest.BacktestExecutor;
+import org.ta4j.core.backtest.TradeOnCurrentCloseModel;
 import org.ta4j.core.num.DoubleNum;
 import org.ta4j.core.num.Num;
 import org.ta4j.core.reports.TradingStatement;
@@ -135,7 +136,7 @@ public class LinearTransactionCostModelTest {
     public void testBacktesting() {
         BaseBarSeries series = new BaseBarSeriesBuilder().withName("CostModel test").build();
         ZonedDateTime now = ZonedDateTime.now();
-        Num one = series.numOf(1);
+        Num one = series.one();
         Num two = series.numOf(2);
         Num three = series.numOf(3);
         Num four = series.numOf(4);
@@ -151,7 +152,7 @@ public class LinearTransactionCostModelTest {
 
         Num orderFee = series.numOf(new BigDecimal("0.0026"));
         BacktestExecutor executor = new BacktestExecutor(series, new LinearTransactionCostModel(orderFee.doubleValue()),
-                new ZeroCostModel());
+                new ZeroCostModel(), new TradeOnCurrentCloseModel());
 
         Num amount = series.numOf(25);
         TradingStatement strategyResult = executor.execute(strategies, amount).get(0);
